@@ -1,55 +1,22 @@
-# Parisian Expert Chatbot
+# Chatbot Experto Parisino
 
-This Python script utilizes the OpenAI API to create a chatbot that serves as a virtual Parisian expert. It responds intelligently to a set of common questions related to Parisian landmarks and attractions, providing valuable insights for travel planning purposes. The chatbot enhances the travel planning experience by delivering engaging and immersive responses to users' inquiries.
+Este script en Python utiliza la API de OpenAI para crear un chatbot que actúa como un experto parisino virtual. Responde de manera inteligente a un conjunto de preguntas comunes relacionadas con los lugares emblemáticos y atracciones de París, proporcionando información valiosa para propósitos de planificación de viajes. El chatbot mejora la experiencia de planificación de viajes al ofrecer respuestas atractivas e inmersivas a las consultas de los usuarios.
 
-## Usage
+## Uso
 
-1. **Installation**: Before running the script, ensure you have the necessary dependencies installed. You can install them using pip:
+1. **Instalación**: Antes de ejecutar el script, asegúrate de tener instaladas las dependencias necesarias. Puedes instalarlas usando pip:
 
     ```bash
     pip install openai
     ```
 
-2. **API Key**: Set up your OpenAI API key as an environment variable named `OPENAI`. You can obtain your API key from the OpenAI website.
+2. **Clave de API**: Configura tu clave de API de OpenAI como una variable de entorno llamada `OPENAI`. Puedes obtener tu clave de API desde el sitio web de OpenAI.
 
-3. **Start your code here!**: Insert your Python code into the provided script template. This code initializes the OpenAI client, defines the conversation structure, and queries the chatbot with user questions.
+3. **¡Comienza tu código aquí!**: Inserta tu código Python en la plantilla de script proporcionada. Este código inicializa el cliente de OpenAI, define la estructura de la conversación y consulta al chatbot con las preguntas de los usuarios.
 
-4. **Customize Conversation**: You can customize the conversation by modifying the `user_qs` list. Add or remove questions according to your requirements.
+4. **Personaliza la Conversación**: Puedes personalizar la conversación modificando la lista `user_qs`. Agrega o elimina preguntas según tus requisitos.
 
-5. **Run the Script**: Execute the script to interact with the Parisian expert chatbot. It will provide responses to the user's questions based on the trained GPT-3.5 model.
+5. **Ejecuta el Script**: Ejecuta el script para interactuar con el chatbot experto parisino. Proporcionará respuestas a las preguntas del usuario basadas en el modelo GPT-3.5 entrenado.
 
-## Example Conversation
+Este README proporciona una descripción general del proyecto, instrucciones de uso y detalles sobre cómo personalizar y ejecutar el script. ¡Disfruta interactuando con tu chatbot experto parisino!
 
-```python
-import os
-from openai import OpenAI
-
-# Define the model to use
-model = "gpt-3.5-turbo"
-
-# Define the client
-client = OpenAI(api_key=os.environ["OPENAI"])
-conversation = [{"role": "system", "content": "You are a virtual Parisian expert, delivering valuable insights into the city's iconic landmarks and hidden treasures. You will respond intelligently to a set of common questions, providing a more engaging and immersive travel planning experience for the clientele of Peterman Reality Tours." }]
-
-user_qs = [
-    "How far away is the Louvre from the Eiffel Tower (in miles) if you are driving?",
-    "Where is the Arc de Triomphe?",
-    "What are the must-see artworks at the Louvre Museum?"
-]
-
-for q in user_qs:
-    print("User:", q)
-    user_dict = {"role": "user", "content": q}
-    conversation.append(user_dict)
-
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=conversation,
-        temperature=0.0,
-        max_tokens=100
-    )
-
-    assistant_dict = {"role": "assistant", "content": response.choices[0].message.content}
-    conversation.append(assistant_dict)
-
-    print("Assistant:", response.choices[0].message.content, "\n")
